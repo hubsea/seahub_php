@@ -24,6 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('delete:images')->daily();
         // $schedule->command('inspire')
         //          ->hourly();
     }
