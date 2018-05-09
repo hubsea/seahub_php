@@ -32,6 +32,19 @@ class CreateProjectTable extends Migration
         });
         DB::statement("ALTER TABLE `enterprise_main` comment 'enterprise main table'");
         /**
+         *Enterprise Inflation model
+         */
+        Schema::create('enterprise_inflation_model', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('enterprise_id')->index();
+            $table->timestamp('begin_time')->comment('this 100% stock distribution started at');
+            $table->timestamp('end_time')->comment('this 100% stock distribution ended at');
+            $table->enum('inflation_stock_type', ['fixed', 'proportional'])->default('proportional');
+            $table->bigInteger('capital_stock')->comment('after allocating 100% stock，every year proportional or fixed stock provide to creator');
+            $table->timestamps();
+        });
+        DB::statement("ALTER TABLE `enterprise_inflation_model` comment 'enterprise main table'");
+        /**
          * company
          * Offline enterprise
          */
@@ -107,7 +120,7 @@ class CreateProjectTable extends Migration
             $table->increments('id');
             $table->char('name', 12)->comment('project name');
             $table->integer('project_id')->index();
-            $table->integer('user_id')->index();
+            $table->integer('creator_id')->index();
             $table->timestamps();
         });
         DB::statement("ALTER TABLE `project_partner` comment 'project participants'");
@@ -124,9 +137,9 @@ class CreateProjectTable extends Migration
         });
         DB::statement("ALTER TABLE `git_main` comment 'third party git management main table'");
         /**
-         *user
+         *creator
          */
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('creator', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
