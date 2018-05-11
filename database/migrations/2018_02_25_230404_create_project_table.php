@@ -43,7 +43,7 @@ class CreateProjectTable extends Migration
             $table->bigInteger('capital_stock')->comment('after allocating 100% stock，every year proportional or fixed stock provide to creator');
             $table->timestamps();
         });
-        DB::statement("ALTER TABLE `enterprise_inflation_model` comment 'enterprise main table'");
+        DB::statement("ALTER TABLE `enterprise_inflation_model` comment 'enterprise inflation model table'");
         /**
          * company
          * Offline enterprise
