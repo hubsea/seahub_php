@@ -38,7 +38,7 @@ class CreateProjectTable extends Migration
             $table->increments('id');
             $table->integer('enterprise_id')->index();
             $table->timestamp('begin_time')->comment('this 100% stock distribution started at');
-            $table->timestamp('end_time')->comment('this 100% stock distribution ended at');
+            $table->timestamp('end_time')->useCurrent()->comment('this 100% stock distribution ended at');
             $table->enum('inflation_stock_type', ['fixed', 'proportional'])->default('proportional');
             $table->bigInteger('capital_stock')->comment('after allocating 100% stock，every year proportional or fixed stock provide to creator');
             $table->timestamps();
@@ -80,7 +80,7 @@ class CreateProjectTable extends Migration
             $table->integer('project_id')->index();
             $table->tinyInteger('stage')->default(0)->comment('the stage of the project,start from 0');
             $table->timestamp('begin_time')->comment('this round start time');
-            $table->timestamp('end_time')->comment('this round end time');
+            $table->timestamp('end_time')->useCurrent()->comment('this round end time');
             $table->enum('status', ['waiting', 'ing', 'finish'])->default('waiting');
             $table->smallInteger('unit_num')->default(0);
             $table->smallInteger('left_unit_num')->default(0);
@@ -98,8 +98,8 @@ class CreateProjectTable extends Migration
             $table->integer('assign_user_id')->comment('assignment of user');
             $table->integer('winner_id')->comment('user id who win the unit');
             $table->timestamp('begin_time')->comment('this unit work start time');
-            $table->timestamp('end_time')->comment('this unit work end time');
-            $table->enum('status', ['registration', 'ing', 'review', 'finish'])->default('waiting');
+            $table->timestamp('end_time')->useCurrent()->comment('this unit work end time');
+            $table->enum('status', ['registration', 'ing', 'review', 'finish'])->default('registration');
             $table->smallInteger('worker_count')->default(1);
             $table->smallInteger('worker_reward_coin')->default(0);
             $table->json('worker_ids')->nullable();
