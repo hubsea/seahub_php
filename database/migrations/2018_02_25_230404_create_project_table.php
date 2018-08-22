@@ -136,17 +136,7 @@ class CreateProjectTable extends Migration
             $table->timestamps();
         });
         DB::statement("ALTER TABLE `git_main` comment 'third party git management main table'");
-        /**
-         *creator
-         */
-        Schema::create('creator', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
-        });
+
     }
 
     /**
@@ -156,13 +146,14 @@ class CreateProjectTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('enterprise_main');
+        Schema::dropIfExists('enterprise_inflation_model');
+        Schema::dropIfExists('company_main');
         Schema::dropIfExists('project_main');
         Schema::dropIfExists('project_assign_round');
         Schema::dropIfExists('project_assign_unit');
         Schema::dropIfExists('project_role');
         Schema::dropIfExists('project_partner');
-        Schema::dropIfExists('company_main');
         Schema::dropIfExists('git_main');
-        Schema::dropIfExists('users');
     }
 }

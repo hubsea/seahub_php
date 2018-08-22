@@ -19,3 +19,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/users/{user}', 'UsersController@show')->name('users.show');
 Route::resource('users', 'UsersController', ['only' => ['show', 'update', 'edit']]);
+
+Route::resource('/company', 'CompanyController', ['only' => ['index', 'create', 'store', 'update', 'edit', 'destroy']]);
